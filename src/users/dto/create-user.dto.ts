@@ -5,7 +5,6 @@ import {
   MinLength,
   MaxLength,
   IsEmail,
-  IsPhoneNumber,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -29,6 +28,8 @@ export class CreateUserDto {
     example: 'john.doe@example.com',
   })
   @IsEmail()
+  @IsString()
+  @IsNotEmpty()
   @MinLength(2)
   @MaxLength(505)
   email: string;
@@ -39,8 +40,16 @@ export class CreateUserDto {
     maxLength: 15,
     example: '+1234567890',
   })
-  @IsPhoneNumber(undefined)
+  @IsString()
+  @IsNotEmpty()
   @MinLength(10)
   @MaxLength(15)
   phone: string;
+
+  @ApiProperty({ example: 'P@ssw0rd123', description: 'User password' })
+  @MinLength(3)
+  @MaxLength(1000)
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }

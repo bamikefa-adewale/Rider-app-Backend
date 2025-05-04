@@ -19,6 +19,9 @@ export class Users {
   @Column({ unique: true, type: 'varchar', length: 15, nullable: false })
   phone: string;
 
+  @Column({ type: 'varchar', length: 1000 })
+  password: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 }

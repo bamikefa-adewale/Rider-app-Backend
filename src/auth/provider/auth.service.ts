@@ -1,11 +1,18 @@
+import { SignInDto } from './../dto/sign-in.dto';
+import { SignInProvider } from './sign-in.provider';
 import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from '../dto/create-auth.dto';
 import { UpdateAuthDto } from '../dto/update-auth.dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    console.log(createAuthDto);
+  constructor(
+    /**
+     * Injecting user UsersService
+     */
+    private readonly SignInProvider: SignInProvider,
+  ) {}
+  public async signIn(signInDto: SignInDto) {
+    return this.SignInProvider.signIn(signInDto);
   }
 
   findAll() {
